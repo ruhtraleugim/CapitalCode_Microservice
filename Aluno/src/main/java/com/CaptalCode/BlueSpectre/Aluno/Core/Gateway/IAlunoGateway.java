@@ -12,7 +12,7 @@ public interface IAlunoGateway {
 
     List<AlunoDomain> buscarTodosAlunos();
 
-    Optional<AlunoDomain> bucarPorParam(Object T);
+    Optional<AlunoDomain> bucarPorParam(String t, Object e);
 
     AlunoDomain cadastrarAluno(AlunoDomain alunoDomain);
 

@@ -30,13 +30,15 @@ public class AlunoGatewayImpl implements IAlunoGateway {
     }
 
     /**
-     * @param T
+     * @param t
+     * @param e
      * @return
      */
     @Override
-    public Optional<AlunoDomain> bucarPorParam(Object T) {
+    public Optional<AlunoDomain> bucarPorParam(String t, Object e) {
         return Optional.empty();
     }
+
 
     /**
      * @param alunoDomain

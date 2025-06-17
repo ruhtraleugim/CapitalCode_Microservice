@@ -11,24 +11,24 @@ import org.springframework.stereotype.Service;
 public class CadastrarAlunoService  {
 
     private final CadastrarAluno cadastrarAlunoUsecase;
-    private final BuscarAlunoPorParam<String> buscarAlunoPorParam;
+    private final BuscarAlunoPorParam buscarAlunoPorParam;
     private final AlunoMapper alunoMapper;
 
-    public CadastrarAlunoService(CadastrarAluno cadastrarAlunoUsecase, BuscarAlunoPorParam<String > buscarAlunoPorParam, AlunoMapper alunoMapper) {
+    public CadastrarAlunoService(CadastrarAluno cadastrarAlunoUsecase, BuscarAlunoPorParam buscarAlunoPorParam, AlunoMapper alunoMapper) {
         this.cadastrarAlunoUsecase = cadastrarAlunoUsecase;
         this.buscarAlunoPorParam = buscarAlunoPorParam;
         this.alunoMapper = alunoMapper;
     }
 
     public AlunoDTO cadastrarAluno(AlunoDTO alunoDTO){
-        var alunoExiste = buscarAlunoPorParam.execute(alunoDTO.pessoa().cfp());
+        var alunoExiste = buscarAlunoPorParam.execute("CPF", alunoDTO.pessoa().cfp() );
 
-        if (alunoExiste != null){
-            throw new RuntimeException();
-        }
-        cadastrarAlunoUsecase.cadastrarAluno(alunoMapper.toDomain(alunoDTO));
+        if (VerificarNecessidadeResponsavelAlunoService.verificarIdade(alunoDTO)){
+            if (alunoExiste.isEmpty()){
+                throw new RuntimeException();
+            }else cadastrarAlunoUsecase.cadastrarAluno(alunoMapper.toDomain(alunoDTO));
+        }else throw new RuntimeException("O aluno não possui idade o suficiente para ser cadastrado sozinho");
 
         return  alunoDTO;
-
     }
 }
