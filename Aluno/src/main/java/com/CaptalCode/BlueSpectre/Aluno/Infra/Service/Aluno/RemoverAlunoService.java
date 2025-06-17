@@ -14,9 +14,9 @@ public class RemoverAlunoService {
         this.removerAluno = removerAluno;
     }
 
-    public void removeraluno(String UUId, UUID alunoID ){
+    public void removeraluno(String valor, UUID alunoID ){
         //Verificar o nivel de acesso do usuario
-        if (buscarAlunosUsecase.execute(UUId, alunoID).isEmpty()){
+        if (buscarAlunosUsecase.execute(valor, alunoID).isEmpty()){
             throw new RuntimeException("aluno com id " + alunoID + " não encontrado");
         }else removerAluno.deletarAluno(alunoID);
     }

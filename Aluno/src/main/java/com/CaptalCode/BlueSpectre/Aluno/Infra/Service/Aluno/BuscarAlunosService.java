@@ -7,16 +7,16 @@ import com.CaptalCode.BlueSpectre.Aluno.Infra.Mapper.AlunoMapper;
 
 import java.util.List;
 
-public class BuscarAlunoService {
+public class BuscarAlunosService {
     private final BuscarAlunos buscarAlunos;
     private final AlunoMapper alunoMapper;
 
-    public BuscarAlunoService(BuscarAlunos buscarAlunos, AlunoMapper alunoMapper) {
+    public BuscarAlunosService(BuscarAlunos buscarAlunos, AlunoMapper alunoMapper) {
         this.buscarAlunos = buscarAlunos;
         this.alunoMapper = alunoMapper;
     }
 
-    public List<AlunoDTO> buscarAlunos(AlunoDTO alunoDTO){
+    public List<AlunoDTO> buscarAlunos(){
         List<AlunoDomain> alunoDomain = buscarAlunos.buscarAlunos();
         return alunoDomain.stream().map(alunoMapper::toDTO).toList();
     }

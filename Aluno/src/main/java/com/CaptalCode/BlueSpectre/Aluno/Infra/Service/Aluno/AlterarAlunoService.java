@@ -23,7 +23,7 @@ public class AlterarAlunoService {
         this.removerAluno = removerAluno;
     }
 
-    public AlunoDTO alterarAluno(AlunoDTO alunoDTO, UUID alunoID){
+    public void alterarAluno(AlunoDTO alunoDTO, UUID alunoID){
         Optional<AlunoDomain> alunod = buscarAlunoPorParam.execute("UUID", alunoID);
         if (alunod.isEmpty()){
             throw new RuntimeException("Aluno não encontrado");
@@ -31,6 +31,6 @@ public class AlterarAlunoService {
             removerAluno.deletarAluno(alunoID);
             cadastrarAluno.cadastrarAluno(alunoMapper.toDomain(alunoDTO));
         }
-        return alunoDTO;
     }
+
 }
